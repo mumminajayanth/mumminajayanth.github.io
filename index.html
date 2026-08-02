@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mummina Jayanth — Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Space+Grotesk:wght@500;600;700&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --void:#0B0C0E;
+    --charcoal:#17191D;
+    --charcoal2:#1E2227;
+    --line:#2B2F35;
+    --amber:#D9A156;
+    --amber-dim:rgba(217,161,86,0.14);
+    --teal:#3E7B73;
+    --teal-dim:rgba(62,123,115,0.16);
+    --paper:#ECEDEB;
+    --mute:#90969D;
+    --bar-h:34px;
+    --title:'Anton', sans-serif;
+    --display:'Space Grotesk', sans-serif;
+    --sans:'IBM Plex Sans', sans-serif;
+    --mono:'IBM Plex Mono', monospace;
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--void);
+    color:var(--paper);
+    font-family:var(--sans);
+    line-height:1.6;
+    padding-top:var(--bar-h);
+    padding-bottom:var(--bar-h);
+    -webkit-font-smoothing:antialiased;
+    position:relative;
+  }
+  body::before{
+    content:"";
+    position:fixed; inset:0; z-index:1; pointer-events:none;
+    opacity:0.035; mix-blend-mode:overlay;
+    background-image:url("data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  a{color:var(--amber); text-decoration:none;}
+  a:hover{text-decoration:underline;}
+  a:focus-visible, button:focus-visible{outline:2px solid var(--amber); outline-offset:3px; border-radius:3px;}
+
+  .wrap{max-width:980px; margin:0 auto; padding:0 28px; position:relative; z-index:2;}
+
+  /* ---------- LETTERBOX BARS ---------- */
+  .letterbar{
+    position:fixed; left:0; right:0; height:var(--bar-h);
+    background:#000; z-index:50; display:flex; align-items:center;
+    font-family:var(--mono); font-size:.68rem; letter-spacing:.06em; color:var(--mute);
+  }
+  .letterbar.top{top:0; border-bottom:1px solid var(--line);}
+  .letterbar.bottom{bottom:0; border-top:1px solid var(--line);}
+  .letterbar .inner{display:flex; justify-content:space-between; align-items:center; width:100%; max-width:980px; margin:0 auto; padding:0 28px;}
+  .letterbar .slate{color:var(--amber); text-transform:uppercase;}
+  .letterbar nav{display:flex; gap:18px; text-transform:uppercase;}
+  .letterbar nav a{color:var(--mute);}
+  .letterbar nav a:hover{color:var(--amber);}
+  #tc{color:var(--mute); font-variant-numeric:tabular-nums;}
+
+  /* ---------- HERO ---------- */
+  .hero{
+    min-height:84vh; display:flex; flex-direction:column; justify-content:center;
+    align-items:center; text-align:center; position:relative; overflow:hidden; padding:60px 28px;
+  }
+  .spotlight{
+    position:absolute; inset:-20%; z-index:0; pointer-events:none;
+    background:radial-gradient(ellipse 50% 40% at 50% 35%, var(--amber-dim), transparent 70%);
+    animation:drift 14s ease-in-out infinite alternate;
+  }
+  @keyframes drift{
+    0%{transform:translate(-3%, -2%) scale(1);}
+    100%{transform:translate(3%, 3%) scale(1.08);}
+  }
+  .slug{
+    font-family:var(--mono); font-size:.74rem; letter-spacing:.1em; text-transform:uppercase;
+    color:var(--amber); margin-bottom:22px; position:relative; z-index:2;
+  }
+  h1.title{
+    font-family:var(--title); font-weight:400; text-transform:uppercase;
+    font-size:clamp(2.8rem, 9vw, 5.6rem); letter-spacing:.02em; line-height:1;
+    margin:0 0 22px; color:var(--paper); position:relative; z-index:2;
+  }
+  .tagline{
+    font-size:1.08rem; color:var(--mute); max-width:560px; margin:0 auto 30px;
+    position:relative; z-index:2;
+  }
+  .chiprow{display:flex; flex-wrap:wrap; gap:10px; justify-content:center; margin-bottom:32px; position:relative; z-index:2;}
+  .chip{
+    font-family:var(--mono); font-size:.74rem; letter-spacing:.02em;
+    border:1px solid var(--line); border-radius:999px; padding:6px 14px; color:var(--mute);
+  }
+  .chip.accent{border-color:var(--amber); color:var(--amber); background:var(--amber-dim);}
+
+  .billing{
+    display:flex; flex-wrap:wrap; gap:16px; justify-content:center;
+    font-family:var(--mono); font-size:.78rem; color:var(--mute); position:relative; z-index:2;
+  }
+  .billing a{color:var(--paper);}
+  .billing a:hover{color:var(--amber);}
+  .billing .dot{color:var(--line);}
+
+  .scrollcue{margin-top:46px; font-family:var(--mono); font-size:.68rem; letter-spacing:.1em; color:var(--mute); text-transform:uppercase; position:relative; z-index:2;}
+  .scrollcue .arrow{display:block; margin-top:6px; animation:bob 2s ease-in-out infinite;}
+  @keyframes bob{0%,100%{transform:translateY(0);} 50%{transform:translateY(5px);}}
+
+  @media (prefers-reduced-motion: reduce){
+    .spotlight{animation:none;}
+    .scrollcue .arrow{animation:none;}
+    html{scroll-behavior:auto;}
+  }
+
+  /* ---------- RETRIEVAL PANEL ---------- */
+  .panel{
+    margin:54px auto 0; background:var(--charcoal); border:1px solid var(--line); border-radius:8px;
+    padding:0; max-width:640px; position:relative; z-index:2; overflow:hidden;
+  }
+  .panel-head{
+    display:flex; align-items:center; gap:8px; padding:12px 18px; border-bottom:1px solid var(--line);
+    font-family:var(--mono); font-size:.7rem; letter-spacing:.06em; text-transform:uppercase; color:var(--mute);
+  }
+  .rec-dot{width:7px; height:7px; border-radius:50%; background:var(--amber); animation:blink 1.6s ease-in-out infinite;}
+  @media (prefers-reduced-motion: reduce){.rec-dot{animation:none;}}
+  @keyframes blink{0%,100%{opacity:1;} 50%{opacity:.25;}}
+  .panel-body{padding:22px 24px 24px;}
+  .query-line{font-family:var(--mono); font-size:.86rem; color:var(--mute); margin-bottom:18px;}
+  .query-line .q{color:var(--paper);}
+  .frames-row{display:flex; flex-wrap:wrap; gap:8px; margin-bottom:16px;}
+  .frame{
+    font-family:var(--mono); font-size:.72rem; border:1px solid var(--line); border-radius:5px;
+    padding:7px 10px; color:var(--mute); background:var(--charcoal2);
+  }
+  .frame.hit{border-color:var(--amber); color:var(--amber); box-shadow:0 0 0 0 var(--amber-dim);}
+  .panel.animate .frame.hit{animation:flash 1.6s ease-out 1;}
+  @keyframes flash{
+    0%{box-shadow:0 0 0 0 var(--amber-dim);}
+    50%{box-shadow:0 0 0 6px var(--amber-dim);}
+    100%{box-shadow:0 0 0 0 transparent;}
+  }
+  .pipeline{font-family:var(--mono); font-size:.7rem; color:var(--mute); text-align:center; margin-bottom:16px;}
+  .subtitle-bar{
+    background:rgba(0,0,0,0.55); border:1px solid var(--line); border-radius:5px;
+    padding:10px 16px; text-align:center; font-size:.9rem; color:var(--paper);
+  }
+
+  /* ---------- SECTION SHELL ---------- */
+  section{padding:64px 0; position:relative; z-index:2; scroll-margin-top:50px;}
+  section + section{border-top:1px solid var(--line);}
+  .slugline{display:flex; align-items:baseline; gap:14px; margin-bottom:8px; flex-wrap:wrap;}
+  .slugline .scene{font-family:var(--mono); font-size:.74rem; color:var(--amber); letter-spacing:.08em; text-transform:uppercase;}
+  .slugline .loc{font-family:var(--mono); font-size:.74rem; color:var(--mute); letter-spacing:.04em; text-transform:uppercase;}
+  .slugline + h2{font-family:var(--display); font-size:1.55rem; font-weight:600; margin:0 0 30px; color:var(--paper);}
+
+  /* ---------- FLAGSHIP ---------- */
+  .flagship{
+    background:linear-gradient(165deg, var(--charcoal) 0%, var(--charcoal2) 100%);
+    border:1px solid var(--line); border-top:2px solid var(--amber); border-radius:8px;
+    padding:30px 30px 26px; margin-bottom:30px;
+  }
+  .flagship-top{display:flex; justify-content:space-between; align-items:flex-start; gap:16px; flex-wrap:wrap; margin-bottom:16px;}
+  .flagship-top h3{font-family:var(--display); font-size:1.4rem; margin:0; color:var(--paper);}
+  .badge{
+    font-family:var(--mono); font-size:.68rem; text-transform:uppercase; letter-spacing:.07em;
+    padding:5px 12px; border-radius:999px; border:1px solid var(--amber); color:var(--amber); background:var(--amber-dim);
+    white-space:nowrap;
+  }
+  .kv-row{display:grid; grid-template-columns:110px 1fr; gap:6px 14px; font-size:.88rem; margin-bottom:16px;}
+  .kv-row dt{font-family:var(--mono); font-size:.7rem; text-transform:uppercase; letter-spacing:.05em; color:var(--mute); padding-top:2px;}
+  .kv-row dd{margin:0; color:var(--paper);}
+  .desc{color:var(--mute); font-size:.95rem; margin-bottom:18px; max-width:660px;}
+  .stackrow{display:flex; flex-wrap:wrap; gap:8px; margin-bottom:20px;}
+  .stack-tag{font-family:var(--mono); font-size:.7rem; background:var(--charcoal2); border:1px solid var(--line); border-radius:4px; padding:4px 9px; color:var(--mute);}
+  .linkrow{display:flex; gap:20px; font-family:var(--mono); font-size:.84rem; flex-wrap:wrap;}
+  .linkrow a{display:flex; align-items:center; gap:6px; font-weight:500;}
+  .linkrow .placeholder{color:var(--teal); font-style:italic; font-weight:400;}
+
+  /* ---------- FRAME GRID (secondary projects) ---------- */
+  .grid{display:grid; grid-template-columns:repeat(3, 1fr); gap:18px;}
+  @media (max-width:780px){.grid{grid-template-columns:1fr;}}
+  .fcard{
+    background:var(--charcoal); border:1px solid var(--line); border-radius:6px;
+    padding:22px 20px; position:relative;
+  }
+  .fcard::before, .fcard::after{
+    content:""; position:absolute; width:14px; height:14px; border-color:var(--amber); opacity:.55;
+  }
+  .fcard::before{top:8px; left:8px; border-top:2px solid; border-left:2px solid;}
+  .fcard::after{bottom:8px; right:8px; border-bottom:2px solid; border-right:2px solid;}
+  .fcard .tc{font-family:var(--mono); font-size:.68rem; color:var(--mute); letter-spacing:.04em; margin-bottom:12px;}
+  .fcard h4{font-family:var(--display); font-size:1.04rem; margin:0 0 10px; color:var(--paper);}
+  .fcard .type{font-family:var(--mono); font-size:.7rem; color:var(--teal); text-transform:uppercase; letter-spacing:.05em; margin-bottom:10px; display:inline-block;}
+  .fcard p{font-size:.86rem; color:var(--mute); margin:0 0 14px;}
+  .fcard .stackrow{margin-bottom:0;}
+  .fcard .result-line{font-family:var(--mono); font-size:.7rem; color:var(--amber); margin-top:12px; letter-spacing:.02em;}
+
+  /* ---------- EXPERIENCE (film strip) ---------- */
+  .filmstrip{position:relative; padding-left:30px;}
+  .filmstrip::before{
+    content:""; position:absolute; left:4px; top:6px; bottom:6px; width:1px; background:var(--line);
+    background-image:radial-gradient(circle, var(--mute) 1.4px, transparent 1.6px);
+    background-size:100% 22px; background-repeat:repeat-y;
+  }
+  .titem{position:relative; margin-bottom:32px;}
+  .titem:last-child{margin-bottom:0;}
+  .titem::before{
+    content:""; position:absolute; left:-30px; top:4px; width:9px; height:9px;
+    background:var(--amber); border-radius:50%; box-shadow:0 0 0 3px var(--void);
+  }
+  .titem .when{font-family:var(--mono); font-size:.72rem; color:var(--amber); letter-spacing:.04em; margin-bottom:4px; text-transform:uppercase;}
+  .titem h4{font-family:var(--display); font-size:1.06rem; margin:0 0 4px; color:var(--paper);}
+  .titem .org{font-size:.85rem; color:var(--mute); margin-bottom:8px;}
+  .titem p{font-size:.89rem; color:var(--mute); margin:0; max-width:640px;}
+
+  /* ---------- SKILLS ---------- */
+  .skillblock{margin-bottom:20px;}
+  .skillblock .label{font-family:var(--mono); font-size:.7rem; text-transform:uppercase; letter-spacing:.05em; color:var(--mute); margin-bottom:10px;}
+  .skillchips{display:flex; flex-wrap:wrap; gap:8px;}
+
+  /* ---------- EDU / CERTS ---------- */
+  .twocol{display:grid; grid-template-columns:1fr 1fr; gap:24px;}
+  @media (max-width:780px){.twocol{grid-template-columns:1fr;}}
+  .infoblock{background:var(--charcoal); border:1px solid var(--line); border-radius:6px; padding:22px;}
+  .infoblock h4{font-family:var(--display); font-size:1rem; margin:0 0 12px; color:var(--paper);}
+  .infoblock ul{margin:0; padding-left:18px; color:var(--mute); font-size:.88rem;}
+  .infoblock li{margin-bottom:8px;}
+  .infoblock .school{color:var(--paper); font-weight:500;}
+
+  /* ---------- FOOTER ---------- */
+  footer{padding:50px 0 30px; text-align:center; position:relative; z-index:2;}
+  footer .fadeout{font-family:var(--mono); font-size:.72rem; letter-spacing:.1em; color:var(--mute); text-transform:uppercase; margin-bottom:18px;}
+  footer .billing{margin-bottom:16px;}
+  footer .fineprint{font-family:var(--mono); font-size:.7rem; color:var(--mute); letter-spacing:.04em;}
+</style>
+</head>
+<body>
+
+<div class="letterbar top">
+  <div class="inner">
+    <span class="slate">JAYANTH — DIR.'S REEL</span>
+    <nav>
+      <a href="#projects">Projects</a>
+      <a href="#experience">Experience</a>
+      <a href="#skills">Skills</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </div>
+</div>
+
+<main class="wrap">
+
+  <section class="hero">
+    <div class="spotlight"></div>
+    <div class="slug">INT. PORTFOLIO — PRESENT DAY</div>
+    <h1 class="title">Mummina Jayanth</h1>
+    <p class="tagline">I build the retrieval, ranking, and full-stack systems behind AI products — and ship them all the way to a working URL, not just a notebook.</p>
+
+    <div class="chiprow">
+      <span class="chip accent">Python</span>
+      <span class="chip accent">Machine Learning</span>
+      <span class="chip accent">RAG / LLMs</span>
+      <span class="chip">Full-Stack</span>
+      <span class="chip">NLP</span>
+    </div>
+
+    <div class="billing">
+      <a href="mailto:mumminajayanth98@gmail.com">mumminajayanth98@gmail.com</a>
+      <span class="dot">·</span>
+      <a href="tel:+919949390046">+91 99493 90046</a>
+      <span class="dot">·</span>
+      <a href="https://github.com/mumminajayanth" target="_blank" rel="noopener">github.com/mumminajayanth</a>
+      <span class="dot">·</span>
+      <span>Vizag, India</span>
+    </div>
+
+    <div class="panel" id="ragPanel">
+      <div class="panel-head"><span class="rec-dot"></span> PLAYBACK — RAG RETRIEVAL DEMO</div>
+      <div class="panel-body">
+        <div class="query-line"><span class="q">Query:</span> "What's the refund window?"</div>
+        <div class="frames-row">
+          <div class="frame">§1 Shipping</div>
+          <div class="frame hit">§4 Refunds</div>
+          <div class="frame">§2 Sizing</div>
+          <div class="frame hit">§7 Returns</div>
+          <div class="frame">§3 Payment</div>
+        </div>
+        <div class="pipeline">top matches retrieved via FAISS → passed to the LLM</div>
+        <div class="subtitle-bar">"Refunds are processed within 7 days of the return being received."</div>
+      </div>
+    </div>
+
+    <div class="scrollcue">Scroll<span class="arrow">↓</span></div>
+  </section>
+
+  <section id="projects">
+    <div class="slugline"><span class="scene">SCENE 01</span><span class="loc">INT. PROJECT REEL — NOW SCREENING</span></div>
+    <h2>Flagship project</h2>
+
+    <div class="flagship">
+      <div class="flagship-top">
+        <h3>RAG-Based PDF Chatbot</h3>
+        <span class="badge">Now screening</span>
+      </div>
+      <dl class="kv-row">
+        <dt>Type</dt><dd>Retrieval-Augmented Generation (LLM app)</dd>
+        <dt>Stack</dt><dd>Python, LangChain, FAISS, HuggingFace, Groq LLaMA, Streamlit</dd>
+      </dl>
+      <p class="desc">
+        Upload any PDF and ask it questions in plain English. The app chunks the document, embeds each chunk with HuggingFace's all-MiniLM-L6-v2 model, and indexes them in FAISS for fast similarity search. On each query, the most relevant chunks are retrieved and passed to a Groq-hosted LLaMA model to generate a grounded answer — wrapped in a simple Streamlit interface. Later extended with Groq Vision so it can also read and answer questions about images and diagrams inside the document.
+      </p>
+      <div class="stackrow">
+        <span class="stack-tag">LangChain</span>
+        <span class="stack-tag">FAISS</span>
+        <span class="stack-tag">HuggingFace Embeddings</span>
+        <span class="stack-tag">Groq LLaMA</span>
+        <span class="stack-tag">Streamlit</span>
+      </div>
+      <div class="linkrow">
+        <a href="#" id="liveDemoLink">↗ Live demo <span class="placeholder">(add your Streamlit URL)</span></a>
+        <a href="https://github.com/mumminajayanth/rag-chatbot" target="_blank" rel="noopener">↗ View code on GitHub</a>
+      </div>
+    </div>
+
+    <div class="slugline" style="margin-top:8px;"><span class="scene">SCENE 02</span><span class="loc">INT. PROJECT REEL — APPLIED ML</span></div>
+    <h2>Supporting cast</h2>
+
+    <div class="grid">
+      <div class="fcard">
+        <div class="tc">00:01:24:07</div>
+        <span class="type">Classification</span>
+        <h4>Iris Flower Classification</h4>
+        <p>Predicts Iris species from petal and sepal measurements. Explored the data with seaborn pair plots, then compared Logistic Regression, KNN, and Decision Tree models using accuracy, a confusion matrix, and a classification report.</p>
+        <div class="stackrow">
+          <span class="stack-tag">pandas</span>
+          <span class="stack-tag">seaborn</span>
+          <span class="stack-tag">scikit-learn</span>
+        </div>
+      </div>
+
+      <div class="fcard">
+        <div class="tc">00:03:09:18</div>
+        <span class="type">Regression</span>
+        <h4>House Price Prediction</h4>
+        <p>Predicts house prices from area, bedrooms, and location. Cleaned the data for nulls and outliers, engineered features, then compared Linear Regression, Random Forest, and XGBoost using R², MAE, and RMSE.</p>
+        <div class="stackrow">
+          <span class="stack-tag">pandas</span>
+          <span class="stack-tag">numpy</span>
+          <span class="stack-tag">XGBoost</span>
+        </div>
+        <div class="result-line">Best model: XGBoost — R² 0.831 · MAE 0.309 · RMSE 0.471</div>
+      </div>
+
+      <div class="fcard">
+        <div class="tc">00:05:41:02</div>
+        <span class="type">NLP</span>
+        <h4>Sentiment Analysis of Tweets</h4>
+        <p>Classifies tweets and reviews as positive, negative, or neutral. Cleaned and tokenized text, removed stopwords, vectorized with TF-IDF and CountVectorizer, then compared Naive Bayes, Logistic Regression, and SVM using confusion matrix and F1-score.</p>
+        <div class="stackrow">
+          <span class="stack-tag">nltk</span>
+          <span class="stack-tag">pandas</span>
+          <span class="stack-tag">scikit-learn</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="experience">
+    <div class="slugline"><span class="scene">SCENE 03</span><span class="loc">INT. TRAINING MONTAGE</span></div>
+    <h2>Internship experience</h2>
+    <div class="filmstrip">
+      <div class="titem">
+        <div class="when">Apr 2026 — Jun 2026</div>
+        <h4>Python Full Stack Development Virtual Internship</h4>
+        <div class="org">EduSkills, in collaboration with AICTE &amp; APSCHE</div>
+        <p>Completed an 8-week, 120-hour virtual internship covering Python full-stack development and built a complete project as part of the program. Awarded an Outstanding (O) grade by AICTE, Ministry of Education, under the National Internship Portal.</p>
+      </div>
+      <div class="titem">
+        <div class="when">May 2025 — Jul 2025</div>
+        <h4>AI with Machine Learning Internship</h4>
+        <div class="org">Embrizon Technologies (ISO 9001:2015, APSCHE-affiliated)</div>
+        <p>Completed a structured internship, training, and project program in AI with Machine Learning. Built and presented a machine learning project applying core AI/ML concepts learned during training.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="skills">
+    <div class="slugline"><span class="scene">SCENE 04</span><span class="loc">INT. TOOLKIT — CLOSE-UP</span></div>
+    <h2>Skills</h2>
+    <div class="skillblock">
+      <div class="label">Languages</div>
+      <div class="skillchips"><span class="stack-tag">Python</span></div>
+    </div>
+    <div class="skillblock">
+      <div class="label">Libraries &amp; tools</div>
+      <div class="skillchips">
+        <span class="stack-tag">pandas</span>
+        <span class="stack-tag">NumPy</span>
+        <span class="stack-tag">scikit-learn</span>
+        <span class="stack-tag">seaborn</span>
+        <span class="stack-tag">matplotlib</span>
+        <span class="stack-tag">NLTK</span>
+        <span class="stack-tag">LangChain</span>
+        <span class="stack-tag">FAISS</span>
+        <span class="stack-tag">Streamlit</span>
+      </div>
+    </div>
+    <div class="skillblock">
+      <div class="label">Concepts</div>
+      <div class="skillchips">
+        <span class="stack-tag">Classification &amp; Regression</span>
+        <span class="stack-tag">NLP</span>
+        <span class="stack-tag">Data Preprocessing &amp; Cleaning</span>
+        <span class="stack-tag">Model Evaluation</span>
+        <span class="stack-tag">Retrieval-Augmented Generation</span>
+      </div>
+    </div>
+    <div class="skillblock">
+      <div class="label">Full-stack</div>
+      <div class="skillchips">
+        <span class="stack-tag">Python Full Stack Development (EduSkills)</span>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="slugline"><span class="scene">SCENE 05</span><span class="loc">INT. ARCHIVES — RECORDS ROOM</span></div>
+    <h2>Education &amp; certifications</h2>
+    <div class="twocol">
+      <div class="infoblock">
+        <h4>Education</h4>
+        <ul>
+          <li><span class="school">Avanthi Institute of Engineering and Technology</span>, Visakhapatnam<br>B.Tech, Computer Science and Engineering — JNTU Gurajada Vizianagaram<br>Semester 6</li>
+        </ul>
+      </div>
+      <div class="infoblock">
+        <h4>Certifications</h4>
+        <ul>
+          <li>Python Full Stack Development with Project — EduSkills / APSCHE / AICTE (2026)</li>
+          <li>Artificial Intelligence with ML — Internship, Project &amp; Training — Embrizon Technologies (2025)</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer id="contact">
+  <div class="wrap">
+    <div class="fadeout">Fade out.</div>
+    <div class="billing">
+      <a href="mailto:mumminajayanth98@gmail.com">mumminajayanth98@gmail.com</a>
+      <span class="dot">·</span>
+      <a href="tel:+919949390046">+91 99493 90046</a>
+      <span class="dot">·</span>
+      <a href="https://github.com/mumminajayanth" target="_blank" rel="noopener">GitHub</a>
+    </div>
+    <div class="fineprint">A PORTFOLIO PRODUCTION — VIZAG, INDIA — 2026</div>
+  </div>
+</footer>
+
+<div class="letterbar bottom">
+  <div class="inner">
+    <span>REEL 01 / JAYANTH_PORTFOLIO.MOV</span>
+    <span id="tc">00:00:00:00</span>
+  </div>
+</div>
+
+<script>
+  const panel = document.getElementById('ragPanel');
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if(e.isIntersecting){
+        panel.classList.add('animate');
+        obs.disconnect();
+      }
+    });
+  }, {threshold:0.4});
+  obs.observe(panel);
+
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const tc = document.getElementById('tc');
+  if(!reduceMotion){
+    let frame = 0;
+    setInterval(() => {
+      frame++;
+      let f = frame % 24;
+      let totalSec = Math.floor(frame / 24);
+      let s = totalSec % 60;
+      let m = Math.floor(totalSec / 60) % 60;
+      let h = Math.floor(totalSec / 3600);
+      const pad = n => String(n).padStart(2,'0');
+      tc.textContent = `${pad(h)}:${pad(m)}:${pad(s)}:${pad(f)}`;
+    }, 1000/24);
+  }
+</script>
+
+</body>
+</html>
